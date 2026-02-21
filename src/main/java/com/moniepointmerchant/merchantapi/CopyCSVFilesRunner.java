@@ -15,7 +15,6 @@ public class CopyCSVFilesRunner implements CommandLineRunner{
   @Override
   public void run(String... args) throws Exception {
     importService.importAllCSVFiles();
-    System.out.println("All CSV Files import complete");
   }
 
 }

@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import com.moniepointmerchant.merchantapi.repository.MerchantActivityRepository;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -19,13 +21,23 @@ public class CsvImportService {
 
   @Autowired
   private JdbcTemplate jdbcTemplate;
+  @Autowired
+  private MerchantActivityRepository merchantActivityRepository;
 
   public void importAllCSVFiles() throws Exception {
+    long count = merchantActivityRepository.count();
+    if (count > 0) {
+      log.info("Data already imported");
+      return;
+    }
+    
     Path folder = Paths.get(System.getProperty("user.dir"), "data");
 
+    System.out.println("Started dataset import");
     Files.list(folder)
       .filter(path -> path.toString().endsWith(".csv"))
       .forEach(this::importCsvFile);
+    System.out.println("All CSV Files import complete");
   }
 
   private void importCsvFile(Path path){
