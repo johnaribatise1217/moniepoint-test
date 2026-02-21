@@ -244,6 +244,3 @@ server:
 - Enum values (Status, Product, Channel, etc.) are string-based in the database
 - The system automatically skips duplicate imports if data already exists
 
----
-
-For questions or issues, please contact the development team.
