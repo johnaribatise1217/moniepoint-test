@@ -17,3 +17,5 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+  server:
+    port: 8080
